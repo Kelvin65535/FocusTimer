@@ -25,6 +25,15 @@ struct FocusTimerApp: App {
                     }
                     currentTime = Double(timeRemaining).secondsAsString()
                     NSLog("count down... current time: \(currentTime)")
+                    if self.timeRemaining == 0 {
+                        cancellable?.cancel()
+                        timer = Timer.publish(every: 1, on: .main, in: .common)
+                        NSLog("count down finished!")
+                        startBtnLabel = "start"
+                        currentTime = "kwls's timer"
+                        timeRemaining = 25 * 60 // 25min
+                        timerStart = false
+                    }
                 }
         }
         
